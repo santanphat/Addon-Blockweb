@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>addon block</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<meta name="addon block" content="block website" charset="UTF-8">
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="css/admin.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/admin.js"></script>
+
+
+<script>
+	function learnRegExp(s) {    
+	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+	return regexp.test(s);    
+	 }
+	$(document).ready(function(){
+		addon.port.emit("popdh");
+		addon.port.on("dh", function (dh) {
+			for(var p in dh){
+				
+			}
+				
+			$.each(dh, function (index) {
+				        if ( index == p ) {
+						 
+						  $("#dh").append(index);
+						  console.log("trang dieu huong hien tai " +index);
+						 
+							return false;
+						} else {
+						
+						  addon.port.emit("xoadh", index);
+						  console.log("daxoa");
+						  $("#dh").append($('#chondh').val());
+						  return false;
+						}
+					  
+				$("#dh").append(index);
+				return false;
+			});
+		});
+		
+		$("#them").click(function () {
+			var url = $('#chondh').val();
+			if(!learnRegExp(url)){
+				alert('Bạn nhập chưa phải url, cần nhập lại');
+				return false;
+			}else 
+				if(url){
+					
+					//addon.port.emit("xoadh");
+					addon.port.emit("chondh", $("#chondh").val());
+					$("#status").text("Bạn đã thay đổi "+url+" thành trang diều hướng của bạn, bạn nên thoát ra rồi vào lại xem cập nhật");
+					return false;
+				}
+			
+			
+		});
+	});
+</script>
+</head>
+<body>
+<div id="khung">
+    <a href="popup.html"><input type="button" value="Thoát" style="float:right;" /></a>
+    <div id="options">
+        <div class="TieuDe"><h5>Trang Điều Khiển Chuyển Hướng.</h5></div>
+		<table width="95%">
+			<tr>
+					<td>
+						<p>Trang điều hướng hiện tại của bạn là:<br>  <span id="dh" style="color:red;"></span></p>
+						<form action="" onsubmit="return false;">
+							<p>Thêm trang chuyển hướng theo ý bạn.<br>
+							<input id="chondh" type='url'  required placeholder="ex: http:google.com.vn"/><br />
+							<input type="button" id="them" value="Thêm!" style="border-radius: 5px;"/></p>
+							<p id="status"></p> 
+							<p id="dhlist"></p>
+						</form>
+					</td>
+			</tr>		  
+		</table>
+    </div>
+</div>
+<footer>
+	<h7>Copyright © 2014-2015</h7>
+</footer>
+</body>
+</html>

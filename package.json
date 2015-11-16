@@ -1,0 +1,13 @@
+{
+  "title": "MySupportBlock Addon",
+  "name": "MySupportBlock",
+  "version": "2.0.1",
+  "description": "MySupportBlock is application website block domain, url or more... help human use web better",
+  "main": "main.js",
+  "author": "San_Tan_Phat",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT"
+}

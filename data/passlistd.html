@@ -1,0 +1,45 @@
+<html>
+<head>
+        <title>addon block</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <meta name="addon block" content="block website" charset="UTF-8">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/admin.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                addon.port.emit("pass1");
+            });
+            addon.port.on("pld", function (pld) {
+                $("#pld").children().remove();
+                $.each(pld, function (index, value) {
+                    $("#pld").append("<div class='siterow' title='"+value+"'><div class='sitename'>"+index+"</div><span class='sitedesc'> : "+value+"</span></div>");
+                    showpl(pld);
+                });
+            });
+            function showpl (PassListsDomain) {
+                $("#pld").children().remove();
+                var i=1;
+                $.each(PassListsDomain, function (index, value) {
+                    $("#pld").append("<div style='border-bottom:2px solid #e7e7e7;' id='site-"+i+"'><img src='images/x2.png' alt='Bỏ Chọn' width='15px' height='15px' id='unblockpass-"+i+"' value='Bỏ chọn' style='border-radius: 5px;' /> " + index + "</div>");
+                    $("#unblockpass-"+i).click(function () {
+                        addon.port.emit("unblockpassd", index);
+                        showpl();
+                    });    
+                    i++;
+                });
+            }
+        </script>
+</head>
+<body>
+<div id="khung">
+		<a href="insertpasslist.html"><input type="button" value="Thoát"  /></a>
+		<div class="TieuDe"><h5>Danh sách các trang web được phép truy cập theo Domain</h5></div>
+        <div id="optionsd" >
+            <p id="statusd"></p>
+            <p id="pld"></p>
+        </div>
+</div>
+		
+</body>
+</html>

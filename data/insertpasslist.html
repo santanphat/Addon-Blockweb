@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>addon block</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<meta name="addon block" content="block website" charset="UTF-8">
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="css/admin.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#noblock").click(function () {
+            var pass = $('#gopass').val();
+            addon.port.emit("gopass", $("#gopass").val());
+            $("#status").text("Bạn đã thêm "+pass+" vào danh sách các trang web được cho phép truy cập");
+        });
+		
+    });
+</script>
+<script type="text/javascript">
+function learnRegExp1(s) {    
+          var regexp = /^(?!:\/\/)([a-zA-Z0-9]+\.)?[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{2,6}?$/i;
+          return regexp.test(s);    
+     }
+    $(document).ready(function(){
+        $("#noblockd").click(function () {
+            var domain = $('#gopassd').val();
+			if(!learnRegExp1(domain)){
+                alert('Bạn nhập chưa phải Domain, cần nhập lại');
+                return false;
+            } 
+            addon.port.emit("gopassd", $("#gopassd").val());
+            $("#status1").text("Bạn đã thêm "+domain+" vào danh sách các trang web được cho phép truy cập");
+        });
+		
+    });
+</script>
+</head>
+<body>
+<div id="khung">
+    <a href="popup.html"><input type="button" value="Thoát" style="float:right;" /></a>
+    <div id="options">
+		<div class="TieuDe"><h5>Thêm danh sách các trang web được phép truy cập</h5></div>
+		<table width="95%">
+			<tr>
+					<td width="50%" style="border-right: 2px solid #e7e7e7;">
+						<form action="" onsubmit="return false;">
+							<p>Thêm Theo URL:<br>
+							<input id="gopass" required placeholder="ex: http://vnexpress.net/..."/><br />
+							<input type="button" id="noblock" value="Thêm!" style="border-radius: 5px;"/></p>
+							<p id="status"></p> 
+						</form>
+					</td>
+					<td width="50%" >
+						<form action="" onsubmit="return false;">
+							<p>Thêm Theo Domain:<br>
+							<input id="gopassd" required placeholder="ex: vnexpress.net"/><br />
+							<input type="button" type="url" id="noblockd" value="Thêm!" style="border-radius: 5px;"/></p>
+							<p id="status1"></p> 
+						</form>
+					</td>
+					
+			</tr>
+			<tr>
+				<td style="border-right: 2px solid #e7e7e7;">
+					<a href="passlist.html" style="text-decoration:none; margin-top:5px;">Danh Sách URL:
+					<br/><img src="images/list.png" height="100px" width="80px"/></a>
+				</td>
+				<td>
+					<a href="passlistd.html" style="text-decoration:none; margin-top:5px;">Danh Sách Domain:
+					<br/><img src="images/list.png" height="100px" width="80px"/></a>
+				</td>
+			</tr>			  
+		</table>
+      
+    </div>
+</div>
+<footer>
+	<h7>Copyright © 2014-2015</h7>
+</footer>
+</body>
+</html>

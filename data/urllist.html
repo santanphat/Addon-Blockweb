@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>addon block</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<meta name="addon block" content="block website" charset="UTF-8">
+		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="js/admin.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                addon.port.emit("pop");
+            });
+            addon.port.on("blocklist", function (blocklist) {
+                $("#blockedlist").children().remove();
+                $.each(blocklist, function (index, value) {
+                    $("#blockedlist").append("<div class='siterow' title='"+value+"'><div class='sitename'>"+index+"</div><span class='sitedesc'> : "+value+"</span></div>");
+                    showBlockList(blocklist);
+                });
+            });
+            function showBlockList (blockedSites) {
+                $("#blocklist").children().remove();
+                var i=1;
+                $.each(blockedSites, function (index, value) {
+                    $("#blocklist").append("<div style='border-bottom:2px solid #e7e7e7;' id='site-"+i+"'><img src='images/x2.png' margin-bottom:10px; alt='Bỏ Chặn' width='15px' height='15px' id='unblock-"+i+"' value='Bỏ chặn' /> " + index + "</div>");
+                    $("#unblock-"+i).click(function () {
+                        addon.port.emit("unblock", index);
+                        showBlockList();
+                    });
+                    i++;
+                });
+            }
+        </script>
+</head>
+<body>
+<div id="khung">
+		<a href="inserturl.html"><input type="button" value="Thoát" /></a>
+		<div class="TieuDe"><h5>Danh sách các trang web bị chặn theo URL</h5></div>
+        <div id="options" >
+            <p id="status"></p>
+            <p id="blocklist"></p>
+        </div>
+</div>
+   
+</body>
+	
+</html>

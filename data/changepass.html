@@ -1,0 +1,66 @@
+<!-- blockcontent.html -->
+<html>
+    <head>
+        <title>Thay Đổi Mật Khẩu</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<meta name="addon block" content="block website" charset="UTF-8">
+		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="css/admin.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript">
+            $(document).ready(function(){
+                addon.port.emit("pop");
+                $("#").click(function () {
+                    $("#change").toggle();
+                });
+                $("#happen").click(function () {
+                    addon.port.emit("happen", $("#change").val());
+                    $("#status").text("Bạn đã cập nhập mật khẩu mà bạn muốn thay");
+                });
+            });
+            addon.port.on("change", function (instead) {
+                $("change").val(instead);
+            });
+			function home(form) {            
+			location="index.html" 
+			} 
+        </script>
+    </head>
+<body>
+<div id="khung">
+	<a href="index.html"><input type="button" value="Thoát"/></a>
+	<div class="TieuDe"><h5> Trang thay đổi mật khẩu</h5></div>
+        <div id="options">
+		<form action="" method="post">
+			Nhập mật khẩu cũ:<br>
+			<input name="pass" id="pass1" type="pass" title="nhập mật khẩu" required><br>
+			Nhập mật khẩu bạn muốn thay đổi:<br>
+			<input name="pass" id="pass2" type="pass" title="nhập mật khẩu" required><br>
+			Nhập lại mật khẩu mới:<br>
+			<input name="pass" id="pass3" type="pass" title="nhập mật khẩu" required><br>
+			<input id="gettext" type="submit" value="thay đổi"style="border-radius: 5px; background-color:Blue; color:white;"/>
+		</form>
+        </div>
+<script type="text/javascript">
+    $('#gettext').on('click', function(){
+        var p1 = $.trim($('#pass1').val()),
+            p2 = $.trim($('#pass2').val()),
+            p3 = $.trim($('#pass3').val());
+
+        if(p1 != localStorage.password){
+            alert('Mat khau cu sai');
+        }else{
+            if(p2 == p3){
+                localStorage.password = $('#pass2').val();
+                alert('Doi pass thanh cong!');
+            }else{
+                alert('Mat khau moi khong khop');
+            }
+        }
+    });
+</script>
+</div>
+<footer>
+	<h7>Copyright © 2014-2015</h7>
+</footer>
+</body>
+</html>

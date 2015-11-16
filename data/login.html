@@ -1,0 +1,34 @@
+<!-- login.html -->
+<html>
+<meta charset="UTF-8">
+<script src="js/jquery-1.9.1.min.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<body>
+<div id="khung">
+<center>
+	<div id="options" width="400px">
+			<div class="TieuDe"><h5 >Trang đăng nhập</h5></div><br>
+			Nhập Password:  <input name="pass" type="password" width="150px" height="30px" placeholder="nhập mật khẩu tại đây"><br/><br/>
+			<input type="button" value="Đăng Nhập" id="btn-dn" />
+			<a href="index.html"><input type="button" value="Thoát" id="thoat"/></a>
+	</div>
+</center>
+
+</div><!--end div khung-->
+<footer>
+	<h7>Copyright © 2014-2015</h7>
+</footer>
+<script>
+	if(!localStorage.password){
+		localStorage.password = 123456;
+	}
+	$('#btn-dn').on('click', function(){
+		if($.trim($('input[name=pass]').val()) == localStorage.password){
+			window.location.href= 'popup.html';
+		}else{
+			alert('Bạn đã nhập sai mật khẩu yêu cầu nhập lại.');
+		}
+	});
+</script>
+</body>
+</html>
